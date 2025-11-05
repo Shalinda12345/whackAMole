@@ -25,24 +25,27 @@ if(isset($_SESSION["user"])){
 
             $errors = array();
 
-            if(empty($fullName) OR empty($email) OR empty($password) OR empty($passwordRepeat)){
-                array_push($errors, "All fileds are Required");
+            if(empty($username) OR empty($email) OR empty($password) OR empty($passwordRepeat)){
+                array_push($errors, "All fields are Required");
             }
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 array_push($errors, "Email is not valid");
             }
             if(strlen($password) < 8){
-                array_push($errors, "Passwords does not match");
+                array_push($errors, "Passwords must be 8 Characters Long");
             }
-            if($password !== $passwordRepeat){
+            if($password != $passwordRepeat){
                 array_push($errors, "Passwords does not match");
             }
 
             require_once "../database.php";
-            $sql = "SELECT * FROM users WHERE username='$username'";
+            $sql = "SELECT * FROM users WHERE username = '$username' ";
             $result = mysqli_query($conn, $sql);
             $rowCount = mysqli_num_rows($result);
             if($rowCount>0){
+                array_push($errors, "username already exists!");
+            }
+            if(count($errors)>0){
                 foreach($errors as $error){
                     echo "<div>$error</div>";
                 }
@@ -51,7 +54,7 @@ if(isset($_SESSION["user"])){
                 $stmt = mysqli_stmt_init($conn);
                 $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
                 if($prepareStmt){
-                    mysqli_stmt_bind_param($stmt, "sss", $fullname, $email, $hashPassword);
+                    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashPassword);
                     mysqli_stmt_execute($stmt);
                     echo "<div>You are Registered Successfully</div>";
                 }else{
