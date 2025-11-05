@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["user"])){
+    header("login/login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +14,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Welcome to Banan Catcher</h1>
-    <a href="logout.php">Logout</a>
+    <div>
+      <h1>Welcome to Banana Catcher</h1>
+      <a href="logout.php">Logout</a>
+    </div>
+    
   </body>
 </html>
