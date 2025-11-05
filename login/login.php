@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION["user"])){
-    header("Location: /../index.php");
+    header("Location: ../index.html");
 }
 ?>
 
@@ -15,18 +15,19 @@ if(isset($_SESSION["user"])){
 <body>
     <div class="container">
         <?php
+        print_r($_POST);
         if(isset($_POST["login"])){
             $username = $_POST["username"];
             $password = $_POST["password"];
             require_once "../database.php";
-            $sql = "SELECT * users WHERE username = '$username'";
+            $sql = "SELECT * FROM users WHERE username = '$username'";
             $result = mysqli_query($conn, $sql);
             $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
             if($user){
                 if(password_verify($password, $user["password"])){
                     session_start();
                     $_SESSION["user"] = "yes";
-                    header("Location: index.php");
+                    header("Location: ../index.php");
                     die();
                 }else{
                     echo "<div>Password does not match </div>";
@@ -37,7 +38,7 @@ if(isset($_SESSION["user"])){
         }
         ?>
 
-        <form action="login.php">
+        <form action="login.php" method="post">
             <div class="form-group">
                 <input type="text" placeholder="Enter Username: " name="username" />
             </div>
