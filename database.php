@@ -3,7 +3,7 @@
 $hostName = "localhost";
 $dbUser = "root";
 $password = "";
-$dbName = "";
+$dbName = "bananacatcher";
 $conn = mysqli_connect($hostName, $dbUser, $password, $dbName);
 
 if(!conn){
