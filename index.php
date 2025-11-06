@@ -18,6 +18,9 @@ if(!isset($_SESSION["user"])){
     if(isset($_POST["start"])){
       header("Location: game/index.php");
     }
+    if(isset($_POST["leaderboard"])){
+      header("Location: leaderboard/leaderboard.php");
+    }
     ?>
     <div>
       <h1>Welcome to Banana Catcher</h1>
