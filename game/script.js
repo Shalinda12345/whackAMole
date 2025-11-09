@@ -88,12 +88,17 @@ function setPlant(plantHole) {
     plant.addEventListener('click', () => {
         score = Math.max(0, score - 5);
         scoreE1.textContent = score;
+        apiCall()
 
         clearTimeout(plantTimer);
         if (plantHole.contains(plant)) plantHole.removeChild(plant);
         plantActive = false;
         setHole(); // restart loop
     });
+}
+
+function apiCall(){
+    window.location.href = "https://marcconrad.com/uob/banana/index.php";   
 }
 
 // Cursor (hammer) movement

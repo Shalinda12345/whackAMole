@@ -1,0 +1,151 @@
+<html lang="en-gb">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="GENERATOR" content="A plain text editor" />
+    <meta name="Author" content="Marc Conrad" />
+    <meta name="Description" content="Banana Game Demo" />
+
+    <title>The Banana Game</title>
+    <style>
+      h1 {
+        color: blue;
+      }
+
+      /* CSS from https://getcssscan.com/css-buttons-examples */
+      .button-62 {
+        background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+        border: 0;
+        border-radius: 12px;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 2.5;
+        outline: transparent;
+        padding: 0 1rem;
+        text-align: center;
+        text-decoration: none;
+        transition: box-shadow 0.2s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+      }
+
+      .h2-62 {
+        line-height: 2.5;
+      }
+
+      .button-62:not([disabled]):focus {
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+          -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+          0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+      }
+
+      .button-62:not([disabled]):hover {
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+          -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+          0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+      }
+    </style>
+    <script>
+      var quest = "";
+      var solution = -1;
+
+      let newgame = function (x) {
+        startup();
+      };
+      let handleInput = function (x) {
+        let inp = document.getElementById("input");
+        var note = document.getElementById("note");
+        if (inp.value == solution) {
+          note.innerHTML =
+            'Correct! -  <button class="button-62" onClick="newgame()" >New game?</button>';
+        } else {
+          note.innerHTML = "Not Correct!";
+        }
+      };
+
+      let startQuest = function (data) {
+        var parsed = JSON.parse(data);
+        quest = parsed.question;
+        solution = parsed.solution;
+        let img = document.getElementById("quest");
+        img.src = quest;
+        let note = document.getElementById("note");
+        note.innerHTML = "Quest is ready.";
+      };
+
+      let fetchText = async function () {
+        let response = await fetch("https://marcconrad.com/uob/banana/api.php");
+        let data = await response.text();
+        startQuest(data);
+      };
+
+      let startup = function () {
+        fetchText();
+      };
+    </script>
+
+    <link type="text/css" rel="stylesheet" id="dark-mode-custom-link" />
+    <link type="text/css" rel="stylesheet" id="dark-mode-general-link" />
+    <style lang="en" type="text/css" id="dark-mode-custom-style"></style>
+    <style lang="en" type="text/css" id="dark-mode-native-style"></style>
+    <style lang="en" type="text/css" id="dark-mode-native-sheet"></style>
+  </head>
+
+  <body>
+    <script>
+      startup();
+    </script>
+    <h1>The Banana Game</h1>
+
+    <img
+      id="quest"
+      src="https://www.sanfoh.com/uob/banana/data/t82c9323d558c3122853d34c442n38.png"
+    />
+    <div>
+      <h2 class="h2-62" id="note">
+        Correct! -
+        <button class="button-62" onclick="newgame()">New game?</button>
+      </h2>
+
+      <h2>
+        Enter the missing digit:
+        <input
+          class="button-62"
+          id="input"
+          onchange="handleInput()"
+          type="number"
+          step="1"
+          min="0"
+          max="9"
+        />
+      </h2>
+    </div>
+    <p></p>
+    <hr />
+    <small>
+      © by
+      <a href="https://marcconrad.com/marc-conrad/index.php?n=12&amp;s=mc"
+        >Marc Conrad</a
+      >
+      2023. The material on this page is presented "as is". There is no warranty
+      implied. This application may be discontinued without notice and must not
+      be used for commercial applications. There is also an
+      <a href="doc.php">API</a> available. Use
+      <a
+        href="https://sanfoh.com/six/sym.php?icon=banana&amp;smile=1"
+        target="_new"
+        >this link</a
+      ><a> to download up to 1000 games. For any comments or suggestions </a
+      ><a href="http://marcconrad.com/consultancy/">contact Marc Conrad</a>.
+      <em>Last update:</em> June 2024.
+    </small>
+    <p></p>
+  </body>
+</html>
