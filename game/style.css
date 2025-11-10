@@ -76,3 +76,99 @@ body{
 .cursor.active{
     transform: translate(-20%, -20%) rotate(-45deg);
 }
+
+
+
+#banana-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.banana-container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.banana-container img {
+  width: 600px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.banana-container input {
+  padding: 5px 10px;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.banana-container button {
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+#gameover-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.gameover-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  font-family: Arial, sans-serif;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.gameover-container h2 {
+  color: crimson;
+  margin-bottom: 10px;
+}
+
+.gameover-container p {
+    color: blue;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.gameover-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: crimson;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.gameover-container button:hover {
+  background-color: darkred;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

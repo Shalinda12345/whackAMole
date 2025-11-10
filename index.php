@@ -16,7 +16,7 @@ if(!isset($_SESSION["user"])){
   <body>
     <?php
     if(isset($_POST["start"])){
-      header("Location: game/index.html");
+      header("Location: game/game.php");
     }
     if(isset($_POST["leaderboard"])){
       header("Location: leaderboard/leaderboard.php");

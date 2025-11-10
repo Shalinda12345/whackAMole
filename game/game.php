@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: ../login/login.php");
+    exit();
+}
+$username = $_SESSION["user"]; // The username from your DB or login
+// var_dump($_SESSION["user"]);
+// exit;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,6 +35,11 @@
     </div>
     <div class="cursor"></div>
 
-    <script src="script.js"></script>
+    <script>
+  // Send PHP username to JS
+  window.username = "<?php echo htmlspecialchars($username, ENT_QUOTES); ?>";
+</script>
+<script src="script.js"></script>
+
   </body>
 </html>
