@@ -98,7 +98,8 @@ function setPlant(plantHole) {
 }
 
 function apiCall(){
-    window.location.href = "https://marcconrad.com/uob/banana/index.php";   
+    window.location.href = "https://marcconrad.com/uob/banana/index.php";  
+    // Test 
 }
 
 // Cursor (hammer) movement
