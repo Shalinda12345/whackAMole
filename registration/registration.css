@@ -1,0 +1,104 @@
+/* Jungle-Themed Registration UI (Plain CSS) */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: url("../assets/jungleRegistration.png") center/cover no-repeat,
+    linear-gradient(to bottom, #2e7d32 0%, #1b5e20 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 35px 45px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 128, 0, 0.5);
+  width: 360px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #3cb371;
+  border-radius: 8px;
+  outline: none;
+  background-color: #e8f5e9;
+  color: #2e8b57;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  border-color: #9acd32;
+  background-color: #fff;
+}
+
+.form-group input[type="submit"] {
+  background-color: #3cb371;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.form-group input[type="submit"]:hover {
+  background-color: #2e8b57;
+  transform: scale(1.05);
+}
+
+.form-group input[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.alert {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.alert-danger {
+  background-color: rgba(255, 0, 0, 0.2);
+  border-left: 4px solid red;
+}
+
+.alert-success {
+  background-color: rgba(0, 128, 0, 0.3);
+  border-left: 4px solid #00ff00;
+}
