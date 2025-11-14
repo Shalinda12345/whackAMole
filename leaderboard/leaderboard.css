@@ -1,0 +1,166 @@
+/* === Global Styles === */
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  background: radial-gradient(circle at top, #68d43c, #2b6611);
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* === Title === */
+h1 {
+  font-size: 3em;
+  color: #fff8e7;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+/* === Leaderboard Boxes === */
+.box {
+  background: url("../assets/menuBg.png") center/cover no-repeat;
+  /* background-size: 10px; */
+  padding: 20px;
+  margin: auto;
+  height: 500px;
+  width: 450px;
+  /* max-width: 500px; */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  /* box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); */
+}
+.topUserScore {
+  /* background: url("../assets/userBG.png") center no-repeat; */
+  /* background-size: contain; */
+
+  height: 100px;
+  width: 100%;
+
+  display: flex;
+  /* justify-content: space-between; spread items inside */
+  align-items: center; /* vertically center text */
+
+  padding: 0 20px; /* spacing inside */
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  color: #e6c50d;
+}
+.name {
+  background: url("../assets/userBG.png") center/cover no-repeat;
+  height: 100px;
+  width: 60%;
+
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #e6c50d;
+
+  margin-bottom: 20px;
+}
+.score {
+  background: url("../assets/scoreBG.png") center no-repeat;
+  background-size: contain; /* show whole image */
+
+  height: 100px; /* smaller fixed size */
+  width: 100px; /* perfect small box */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #ffffff;
+
+  margin-left: 10px;
+  margin-top: -20px;
+}
+
+.userBox {
+  background: url("../assets/userStats.png") center no-repeat;
+  background-size: contain;
+  padding: 10px;
+  margin: auto;
+  width: 400px;
+  height: 180px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.userBox h2::before {
+  content: "🏆 ";
+  font-size: 1.2em;
+  color: #111fe9;
+  position: relative;
+  top: 8px; /* move down */
+}
+
+.userBox p::before {
+  content: "🏆 ";
+  font-size: 1.2em;
+  color: #059481;
+}
+.userBox:hover {
+  transform: translateY(-5px);
+  /* box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); */
+  /* box-shadow: inset; */
+}
+
+/* p {
+  font-size: 1.1em;
+  color: #fff8e7;
+  margin: 10px 0;
+  letter-spacing: 0.5px;
+} */
+
+/* p strong {
+  color: #ffdd8a;
+} */
+
+/* === Ranking Numbers === */
+/* .box p::before {
+  content: "🏆 ";
+  font-size: 1.2em;
+  color: #ffd700;
+} */
+
+/* === Button === */
+.returnBtn {
+  background: linear-gradient(135deg, #ff5a5a, #a60000);
+  color: #fff;
+  font-size: 1.1em;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.returnBtn:hover {
+  background: linear-gradient(135deg, #ff7474, #c00000);
+  transform: scale(1.05);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.4);
+}
+
+.returnBtn:active {
+  transform: scale(0.97);
+}
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  .box {
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 2.2em;
+  }
+}
