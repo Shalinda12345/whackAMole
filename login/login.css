@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: url("../assets/jungleLogin.png") center/cover no-repeat,
+    linear-gradient(to bottom, #2e7d32 0%, #1b5e20 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.container {
+  background: url("../assets/loginUI.png") center/cover no-repeat;
+  padding: 30px 40px;
+  border-radius: 50px;
+  width: 500px;
+  height: 500px;
+  text-align: center;
+  animation: float 3s ease-in-out infinite;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically centers */
+  align-items: center; /* horizontally centers */
+  gap: 15px; /* space between elements */
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #3cb371;
+  border-radius: 8px;
+  outline: none;
+  background-color: #e8f5e9;
+  color: #2e8b57;
+  font-size: 25px;
+  margin-top: 20px;
+}
+
+.form-group input:focus {
+  border-color: #9acd32;
+  background-color: #fff;
+}
+
+.form-btn input {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 50px;
+}
+
+.form-btn input:hover {
+  background-color: #2e8b57;
+  transform: scale(1.05);
+}
+
+.form-btn input:active {
+  transform: scale(0.98);
+}
+
+p {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #e0e0e0;
+}
+
+a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Error & Success Messages Outside Container */
+.message-box {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.alert {
+  display: inline-block;
+  margin: 10px auto;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  max-width: 400px;
+  text-align: center;
+  backdrop-filter: blur(3px);
+}
+
+.alert-danger {
+  background-color: rgba(255, 0, 0, 0.25);
+  border: 2px solid #ff4d4d;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: rgba(0, 128, 0, 0.3);
+  border: 2px solid #00ff00;
+  color: #fff;
+}
