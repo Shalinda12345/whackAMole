@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = '';
+    $mail->Username = 'heshankoralagamage2002@gmail.com';
     $mail->Password = 'icdw hhch rjpm jfrr';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
@@ -29,8 +29,8 @@ if (isset($_POST['submit'])) {
 
     $mail->isHTML(true);
 
-    $mail->Subject = $_POST["subject"];
-    $mail->Body = $_POST["message"];
+    $mail->Subject = "OTP for Your Email Verification";
+    $mail->Body = $otp;
 
     $mail->send();
 
@@ -41,6 +41,8 @@ if (isset($_POST['submit'])) {
         </script>
     ";
 }
+
+$otp = rand(100000, 999999);
 
 ?>
 <!DOCTYPE html>
