@@ -21,17 +21,17 @@ body {
   background: url("../assets/loginUI.png") center/cover no-repeat;
   padding: 30px 40px;
   border-radius: 50px;
-  width: 350px;
-  height: 350px;
+  width: 500px;
+  height: 500px;
   text-align: center;
   animation: float 3s ease-in-out infinite;
 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertically centers */
-  align-items: center; /* horizontally centers */
-  /* gap: 5px; space between elements */
+  justify-content: center;
+  align-items: center;
 }
+
 @keyframes float {
   0%,
   100% {
@@ -42,25 +42,23 @@ body {
   }
 }
 
-h1 {
-  margin-bottom: 20px;
-  color: #ffd700;
-  text-shadow: 1px 1px 4px #000;
-}
+/* ------------------ Form Inputs ------------------ */
 
 .form-group {
   margin-bottom: 15px;
+  margin-left: -40px;
 }
 
 .form-group input {
-  width: 100%;
-  padding: 10px;
+  width: 110%; /* FIXED — no more layout expansion */
+  padding: 15px;
   border: 2px solid #3cb371;
   border-radius: 8px;
   outline: none;
   background-color: #e8f5e9;
   color: #2e8b57;
   font-size: 14px;
+  margin-top: 15px;
 }
 
 .form-group input:focus {
@@ -68,24 +66,30 @@ h1 {
   background-color: #fff;
 }
 
+/* ------------------ Register Button ------------------ */
+
 .form-btn input {
   background-color: #4caf50;
   border: none;
   border-radius: 8px;
   color: #fff;
   padding: 10px 20px;
-  font-size: 1.1em;
+  font-size: 35px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.15s ease-out;
+  margin-top: 15px;
+
+  /* Prevent scaling from expanding container */
+  transform: translateZ(0);
 }
 
 .form-btn input:hover {
   background-color: #2e8b57;
-  transform: scale(1.05);
+  transform: scale(1.05) translateZ(0);
 }
 
-.form-group input[type="submit"]:active {
-  transform: scale(0.98);
+.form-btn input:active {
+  transform: scale(0.98) translateZ(0);
 }
 
 p {
@@ -103,7 +107,8 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Error & Success Messages Outside Container */
+/* ------------------ Messages ------------------ */
+
 .message-box {
   position: absolute;
   top: 30px;
@@ -133,4 +138,76 @@ a:hover {
   background-color: rgba(0, 128, 0, 0.3);
   border: 2px solid #00ff00;
   color: #fff;
+}
+
+/* ------------------ OTP ROW ------------------ */
+
+.otp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* OTP Input */
+.form-group-otp input {
+  width: 130px;
+  padding: 10px;
+  border: 2px solid #3cb371;
+  border-radius: 8px;
+  outline: none;
+  background-color: #e8f5e9;
+  color: #2e8b57;
+  font-size: 14px;
+  margin-top: 15px;
+
+  flex-shrink: 0; /* Prevent shrinking/stretching */
+}
+
+.form-group-otp input:focus {
+  border-color: #9acd32;
+  background-color: #fff;
+}
+
+/* OTP Button */
+.form-btn-otp input {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 0.9em;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-top: 15px;
+
+  width: 120px; /* FIXED WIDTH */
+  flex-shrink: 0;
+  transform: translateZ(0); /* Prevent expanding */
+  transition: transform 0.15s ease-out;
+}
+
+.form-btn-otp input:hover {
+  background-color: #2e8b57;
+  transform: scale(1.05) translateZ(0);
+}
+
+.form-btn-otp input:active {
+  transform: scale(0.98) translateZ(0);
+}
+
+/* Disabled state (no expansion) */
+.form-btn-otp input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Countdown — fixed width to avoid expanding the row */
+#countdown {
+  width: 60px;
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  color: #ffd700;
 }

@@ -11,8 +11,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
-
-
+require_once "../database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +26,15 @@ require 'phpmailer/src/SMTP.php';
 <body>
 
     <?php
+    // Initialize variables
     $errors = [];
     $success = "";
+    $usernameValue = $_POST['username'] ?? '';
+    $emailValue = $_POST['email'] ?? '';
 
+    // Handle Registration Submit
     if (isset($_POST['submit'])) {
+
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -39,22 +43,32 @@ require 'phpmailer/src/SMTP.php';
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
+        // Field Validation
         if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) {
-            array_push($errors, "All fields are required");
+            $errors[] = "All fields are required";
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            array_push($errors, "Email is not valid");
+            $errors[] = "Email is not valid";
         }
         if (strlen($password) < 8) {
-            array_push($errors, "Password must be 8 characters long");
+            $errors[] = "Password must be 8 characters long";
+        }
+        if (ctype_alpha($password)) {
+            $errors[] = "Password contains only letters";
+        }
+        if (is_numeric($password)) {
+            $errors[] = "Password contains only numbers";
         }
         if ($password !== $passwordRepeat) {
-            array_push($errors, "Passwords do not match");
+            $errors[] = "Passwords do not match";
         }
+
+        // OTP Validation
         if (!isset($_SESSION['otp'])) {
             $errors[] = "Please request an OTP first.";
         }
-        if (isset($_SESSION['otp_time']) && (time() - $_SESSION['otp_time'] > 30)) {
+
+        if (isset($_SESSION['otp_time']) && (time() - $_SESSION['otp_time'] > 300)) {
             unset($_SESSION['otp'], $_SESSION['otp_time']);
             $errors[] = "OTP expired. Request a new one.";
         } else {
@@ -63,20 +77,24 @@ require 'phpmailer/src/SMTP.php';
             }
         }
 
-        require_once "../database.php";
+        // Check email duplication
         $sql = "SELECT * FROM users WHERE email = '$email'";
         $result = mysqli_query($conn, $sql);
+
         if (mysqli_num_rows($result) > 0) {
-            array_push($errors, "Email already exists!");
+            $errors[] = "Email already exists!";
         }
 
+        // Insert user if no errors
         if (count($errors) === 0) {
             $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
             $stmt = mysqli_stmt_init($conn);
             $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
+
             if ($prepareStmt) {
                 mysqli_stmt_bind_param($stmt, "sss", $username, $email, $passwordHash);
                 mysqli_stmt_execute($stmt);
+
                 $success = "✅ You are registered successfully! Redirecting to login page...";
                 header("refresh:3; url=../login/login.php");
             } else {
@@ -84,48 +102,57 @@ require 'phpmailer/src/SMTP.php';
             }
         }
     }
+
+    // Handle OTP Request
     if (isset($_POST['otpBtn'])) {
-        $otpCreate = createOTP();
-        $_SESSION["otp"] = $otpCreate;
-        $_SESSION['otp_time'] = time();
 
-        $mail = new PHPMailer(true);
+        $email = $_POST['email'];
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($conn, $sql);
 
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'heshankoralagamage2002@gmail.com';
-        $mail->Password = 'icdw hhch rjpm jfrr';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        if (empty($_POST['email'])) {
+            $errors[] = "Please enter your email before requesting OTP.";
+        } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Please enter a valid email before requesting OTP.";
+        } elseif (mysqli_num_rows($result) > 0) {
+            $errors[] = "Email already exists!";
+        }
 
-        $mail->setFrom('heshankoralagamage2002@gmail.com');
+        if (empty($errors)) {
 
-        $mail->addAddress($_POST['email']);
+            $otpCreate = createOTP();
 
-        $mail->isHTML(true);
+            $_SESSION["otp"] = $otpCreate;
+            $_SESSION['otp_time'] = time();
 
-        $mail->Subject = "OTP for Your Email Verification";
-        $mail->Body = "Your OTP is: <b>$otpCreate</b>";
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'heshankoralagamage2002@gmail.com';
+            $mail->Password = 'icdw hhch rjpm jfrr';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
 
-        $mail->send();
+            $mail->setFrom('heshankoralagamage2002@gmail.com');
+            $mail->addAddress($_POST['email']);
+            $mail->isHTML(true);
 
-        // echo "
-        //     <script>
-        //         alert('sent successfully');
-        //         alert('created OTP: $otpCreate, typed OTP: $otp');
-        //     </script>
-        // ";
-        // document.location.href = '../index.php';
+            $mail->Subject = "OTP for Your Email Verification";
+            $mail->Body = "Your OTP is: <b>$otpCreate</b>";
+
+            $mail->send();
+        }
     }
+
+    // OTP Generator Function
     function createOTP()
     {
         return (string)rand(100000, 999999);
     }
-
     ?>
 
-    <!-- Error/Success Messages ABOVE the container -->
+    <!-- Message Box Section -->
     <div class="message-box">
         <?php
         if (count($errors) > 0) {
@@ -139,13 +166,16 @@ require 'phpmailer/src/SMTP.php';
         ?>
     </div>
 
+    <!-- Registration Form UI -->
     <div class="container">
         <form action="registration.php" method="post">
             <div class="form-group">
-                <input type="text" name="username" placeholder="Full Name: ">
+                <input type="text" name="username" placeholder="Full Name: "
+                    value="<?= htmlspecialchars($usernameValue) ?>">
             </div>
             <div class="form-group">
-                <input type="email" name="email" placeholder="Email: ">
+                <input type="email" name="email" placeholder="Email: "
+                    value="<?= htmlspecialchars($emailValue) ?>">
             </div>
             <div class="form-group">
                 <input type="password" name="password" placeholder="Password: ">
@@ -158,10 +188,10 @@ require 'phpmailer/src/SMTP.php';
                     <input type="text" name="otp" placeholder="OTP">
                 </div>
                 <div class="form-btn-otp">
-                    <input type="submit" value="Send OTP" name="otpBtn">
+                    <input type="submit" value="Send OTP" name="otpBtn" id="otpBtn">
+                    <span id="countdown" class="countdown"></span>
                 </div>
             </div>
-
             <div class="form-btn">
                 <input type="submit" value="Register" name="submit">
             </div>
@@ -171,5 +201,30 @@ require 'phpmailer/src/SMTP.php';
         </div>
     </div>
 </body>
+<script>
+    const otpBtn = document.getElementById("otpBtn");
+    const countdownEl = document.getElementById("countdown");
+
+    // If OTP was requested, start countdown from 60 sec
+    <?php if (isset($_POST['otpBtn']) && empty($errors)) { ?>
+        startCountdown(60);
+    <?php } ?>
+
+    function startCountdown(seconds) {
+        otpBtn.disabled = true; // Disable button
+        let timeLeft = seconds;
+
+        const timer = setInterval(() => {
+            countdownEl.innerHTML = `Wait ${timeLeft}s`;
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(timer);
+                otpBtn.disabled = false; // Enable button again
+                countdownEl.innerHTML = ""; // Clear text
+            }
+        }, 1000);
+    }
+</script>
 
 </html>
