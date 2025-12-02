@@ -134,3 +134,66 @@ a:hover {
   border: 2px solid #00ff00;
   color: #fff;
 }
+
+/* ------------------ OTP ROW ------------------ */
+
+.otp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* OTP Input */
+.form-group-otp input {
+  width: 130px;
+  padding: 10px;
+  border: 2px solid #3cb371;
+  border-radius: 8px;
+  outline: none;
+  background-color: #e8f5e9;
+  color: #2e8b57;
+  font-size: 14px;
+  margin-top: 15px;
+
+  flex-shrink: 0; /* Prevent shrinking/stretching */
+}
+
+.form-group-otp input:focus {
+  border-color: #9acd32;
+  background-color: #fff;
+}
+
+/* OTP Button */
+.form-btn-otp input {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 0.9em;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-top: 15px;
+
+  width: 120px; /* FIXED WIDTH */
+  flex-shrink: 0;
+  transform: translateZ(0); /* Prevent expanding */
+  transition: transform 0.15s ease-out;
+}
+
+.form-btn-otp input:hover {
+  background-color: #2e8b57;
+  transform: scale(1.05) translateZ(0);
+}
+
+.form-btn-otp input:active {
+  transform: scale(0.98) translateZ(0);
+}
+
+/* Disabled state (no expansion) */
+.form-btn-otp input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
