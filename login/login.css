@@ -7,7 +7,7 @@
 body {
   height: 100vh;
   font-family: Arial, sans-serif;
-  background: url("../assets/jungleLogin.png") center/cover no-repeat,
+  background: url("../assets/loginBg.jpg") center/cover no-repeat,
     linear-gradient(to bottom, #2e7d32 0%, #1b5e20 100%);
   display: flex;
   justify-content: center;

@@ -2,9 +2,14 @@
 body {
   font-family: "Poppins", Arial, sans-serif;
   background: radial-gradient(circle at top, #68d43c, #2b6611);
+  background: linear-gradient(to bottom, #1a3c1a, #2e8b57);
+  background-image: url("../assets/leaderboard.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #fff;
   text-align: center;
-  padding: 40px 20px;
+  padding: 5px 20px;
   margin: 0;
   min-height: 100vh;
 }
@@ -14,7 +19,7 @@ h1 {
   font-size: 3em;
   color: #fff8e7;
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
@@ -130,30 +135,6 @@ h1 {
   color: #ffd700;
 } */
 
-/* === Button === */
-.returnBtn {
-  background: linear-gradient(135deg, #ff5a5a, #a60000);
-  color: #fff;
-  font-size: 1.1em;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  margin-top: 25px;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.returnBtn:hover {
-  background: linear-gradient(135deg, #ff7474, #c00000);
-  transform: scale(1.05);
-  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.4);
-}
-
-.returnBtn:active {
-  transform: scale(0.97);
-}
-
 /* === Responsive === */
 @media (max-width: 600px) {
   .box {
@@ -163,4 +144,35 @@ h1 {
   h1 {
     font-size: 2.2em;
   }
+}
+
+/* === Button === */
+.returnMenu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background-image: url("../game/assets/hammer.png");
+  background-size: 35px 35px; /* Adjust icon size if needed */
+  background-repeat: no-repeat;
+  background-position: 12px center;
+
+  padding: 14px 22px 14px 46px; /* Larger button + space for icon */
+  font-size: 18px; /* Larger text */
+
+  background-color: #24f18b;
+  color: #fff;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+}
+
+.returnMenu:hover {
+  background-color: #24f18b;
+  background-image: none; /* Remove hammer icon on hover */
+  padding-left: 22px; /* Adjust padding since icon disappears */
+}
+
+.returnMenu:hover ~ .cursor {
+  display: none;
 }

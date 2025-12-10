@@ -36,10 +36,10 @@ $top_query = $conn->query("SELECT username, MAX(score) AS highest_score FROM sco
         $rank = 1;
         while ($row = $top_query->fetch_assoc()) {
             echo "
-<div class='topUserScore'>
-    <span class='name'>$rank. " . htmlspecialchars($row['username']) . "</span>
-    <span class='score'>" . htmlspecialchars($row['highest_score']) . "</span>
-</div>";
+                <div class='topUserScore'>
+                    <span class='name'>$rank. " . htmlspecialchars($row['username']) . "</span>
+                    <span class='score'>" . htmlspecialchars($row['highest_score']) . "</span>
+                </div>";
 
             $rank++;
         }
@@ -53,8 +53,15 @@ $top_query = $conn->query("SELECT username, MAX(score) AS highest_score FROM sco
     </div>
 
     <div>
-        <button class="returnBtn"><a href="../index.php">Return to Menu</a></button>
+        <button class="returnMenu">🔙</button>
     </div>
 </body>
+
+<script>
+    let returnMenu = document.querySelector(".returnMenu");
+    returnMenu.onclick = function() {
+        window.location.href = "../index.php"; // ← change this
+    };
+</script>
 
 </html>
