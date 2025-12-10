@@ -77,40 +77,6 @@ body {
   transform: scale(0.98);
 }
 
-/* Different button colors for variety */
-.start-btn {
-  /* background-color: #4caf50; */
-}
-
-.leaderboard-btn {
-  /* background-color: #6b8e23; */
-}
-
-.mute-btn {
-  /* background-color: #b8860b; */
-}
-
-.logout-btn {
-  /* background-color: #8b0000; */
-}
-
-/* Hover styles for individual buttons */
-.start-btn:hover {
-  /* background-color: #388e3c; */
-}
-
-.leaderboard-btn:hover {
-  /* background-color: #556b2f; */
-}
-
-.mute-btn:hover {
-  /* background-color: #daa520; */
-}
-
-.logout-btn:hover {
-  /* background-color: #a52a2a; */
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
